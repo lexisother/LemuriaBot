@@ -4,7 +4,11 @@
   "description": "Discord bot to teach Linker TypeScript",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -r dist",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "\"$NODE\" --inspect dist/index.js",
+    "lint": "eslint src --ext .js,.ts --ignore-path .gitignore"
   },
   "repository": {
     "type": "git",

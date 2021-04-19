@@ -1,4 +1,4 @@
-extends: eslint-config-dmitmel/presets/noode
+extends: eslint-config-dmitmel/presets/node
 env:
   browser: true
 
@@ -7,7 +7,7 @@ settings:
     tryExtensions: ['.ts', '.js', '.json', '.node']
 
 rules:
-  node/no-supported-features/es-syntax:
+  node/no-unsupported-features/es-syntax:
     - error
     - ignores:
         - modules
