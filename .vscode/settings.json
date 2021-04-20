@@ -1,0 +1,5 @@
+{
+    "github-actions.workflows.pinned.workflows": [".github/workflows/build.yml"],
+    "github-actions.workflows.pinned.refresh.enabled": true,
+    "github-actions.workflows.pinned.refresh.interval": 65
+}
