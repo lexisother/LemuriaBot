@@ -7,6 +7,7 @@ settings:
     tryExtensions: ['.ts', '.js', '.json', '.node']
 
 rules:
+  node/no-unpublished-import: off
   node/no-unsupported-features/es-syntax:
     - error
     - ignores:
