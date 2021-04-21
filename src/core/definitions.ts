@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import {Message} from "discord.js";
 
 export interface Command {
     name: string;
@@ -9,5 +9,5 @@ export interface Command {
 export interface Event {
     name: string;
     once?: boolean;
-    execute(...args: unknown[]): Promise<void>
+    execute(...args: unknown[]): Promise<void>;
 }

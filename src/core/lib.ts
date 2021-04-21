@@ -1,7 +1,7 @@
-import glob from 'glob';
-import { promisify } from 'util';
-import { client, main } from '../index';
-import { Command, Event } from './definitions';
+import glob from "glob";
+import {promisify} from "util";
+import {client, main} from "../index";
+import {Command, Event} from "./definitions";
 
 const globPromise = promisify(glob);
 
@@ -12,8 +12,8 @@ async function loadCommands(): Promise<void> {
     const commandFiles = await globPromise(`${main}/commands/*{.js,.ts}`);
 
     for (const file of commandFiles) {
-      const command = (await require(file)) as Command;
-      commands.push(command);
+        const command = (await require(file)) as Command;
+        commands.push(command);
     }
 }
 
