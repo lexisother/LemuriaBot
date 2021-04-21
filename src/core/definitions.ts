@@ -5,3 +5,9 @@ export interface Command {
     description: string;
     execute(message: Message, args?: string[]): Promise<Message>;
 }
+
+export interface Event {
+    name: string;
+    once: boolean;
+    execute(...args: unknown[]): Promise<void>
+}

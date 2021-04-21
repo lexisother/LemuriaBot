@@ -1,4 +1,4 @@
-import { Command } from '../core/command';
+import { Command } from '../core/definitions';
 import { Message } from 'discord.js';
 
 const command: Command = {

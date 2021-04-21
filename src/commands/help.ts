@@ -1,5 +1,5 @@
-import { commands } from '../index';
-import { Command } from '../core/command';
+import { commands } from '../core/lib';
+import { Command } from '../core/definitions';
 import { Message } from 'discord.js';
 
 const command: Command = {
