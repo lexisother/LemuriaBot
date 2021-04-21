@@ -8,6 +8,6 @@ export interface Command {
 
 export interface Event {
     name: string;
-    once: boolean;
+    once?: boolean;
     execute(...args: unknown[]): Promise<void>
 }

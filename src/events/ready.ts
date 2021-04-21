@@ -1,9 +1,12 @@
 import { client } from '../index';
+import { Event } from '../core/definitions';
 
-module.exports = {
+const event: Event = {
     name: 'ready',
     once: true,
-    execute() {
+    async execute(): Promise<void> {
         console.log(`Logged in ${client.user?.tag}`);
     }
 }
+
+export = event;
