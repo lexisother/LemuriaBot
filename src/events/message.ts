@@ -8,7 +8,7 @@ const event: Event = {
     async execute(msg: Message): Promise<void> {
         if (msg.author.bot) return;
         const [commandName, ...args] = msg.content.slice(prefix.length).split(/ +/);
-        const command = commands.find((c) => c.name === commandName);
+        const command = commands!.find((c) => c.name === commandName);
         if (command) {
             command.execute(msg, args);
         }

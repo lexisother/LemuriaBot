@@ -1,47 +1,45 @@
-import glob from "glob";
-import {promisify} from "util";
-import {client, main} from "../index";
 import {Command, Event} from "./definitions";
+import {Collection} from "discord.js";
+import {promises as ffs} from "fs";
 
-const globPromise = promisify(glob);
-
-export const commands: Command[] = [];
+// Taken from: https://github.com/keanuplayz/TravBot-v3/blob/5165c5ec4bd564d2415b11218671b164489058b6/src/core/command.ts
+export let commands: Collection<string, Command> | null = null;
 export const events: Event[] = [];
 
-async function loadCommands(): Promise<void> {
-    const commandFiles = await globPromise(`${main}/commands/*{.js,.ts}`);
+async function loadCommands(): Promise<Collection<string, Command>> {
+    if (commands) return commands;
 
-    for (const file of commandFiles) {
-        const command = (await require(file)) as Command;
-        commands.push(command);
+    commands = new Collection();
+    const dir = await ffs.opendir("dist/commands");
+    const listMisc: string[] = [];
+    let selected;
+
+    // eslint-disable-next-line no-cond-assign
+    while ((selected = await dir.read())) {
+        loadCommand(selected.name, listMisc);
     }
+
+    dir.close();
+    return commands;
 }
 
-async function loadEvents(): Promise<void> {
-    const eventFiles = await globPromise(`${main}/events/*{.js,.ts}`);
-    for (const file of eventFiles) {
-        const event = (await require(file)) as Event;
-        events.push(event);
-    }
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, consistent-return
+async function loadCommand(filename: string, list: string[]) {
+    if (!commands) return console.log('Function "loadCommand" was called without initializing commands!');
 
-    for (const event of events) {
-        if (event.once) {
-            client.once(event.name, (...args) => event.execute(...args));
-        } else {
-            client.on(event.name, (...args) => event.execute(...args));
-        }
-    }
-    // for (const file of eventFiles) {
-    //     const event = require(`${__dirname}/events/${file}`);
-    //     if (event.once) {
-    //         client.once(event.name, (...args) => event.execute(...args));
-    //     } else {
-    //         client.on(event.name, (...args) => event.execute(...args));
-    //     }
-    // }
+    const header = filename.substring(0, filename.indexOf(".js"));
+    const command = (await import(`../commands/${header}`)).default as Command | undefined;
+
+    if (!command) return console.log(`Command "${header}" has no default export which is a Command instance!`);
+
+    list.push(header);
+
+    if (commands.has(header)) console.log(`Command "${header}" already exists!`);
+    else commands.set(header, command);
+
+    console.log(`Loading command: ${header}`);
 }
 
 export async function init(): Promise<void> {
     await loadCommands();
-    await loadEvents();
 }

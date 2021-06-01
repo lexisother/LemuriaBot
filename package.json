@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Discord bot to teach Linker TypeScript",
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=11.14.0"
+  },
   "scripts": {
     "clean": "rm -r dist",
     "build": "tsc",

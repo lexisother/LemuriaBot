@@ -9,3 +9,6 @@ export const {prefix} = config;
 init();
 
 client.login(config.token);
+
+import "./events/ready";
+import "./events/message";
