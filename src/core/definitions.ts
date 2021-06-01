@@ -1,24 +1,12 @@
 import {Message} from "discord.js";
 
-export interface Command {
-    name: string;
-    description: string;
-    execute(message: Message, args?: string[]): Promise<Message>;
-}
-
-export interface Event {
-    name: string;
-    once?: boolean;
-    execute(...args: unknown[]): Promise<void>;
-}
-
 export interface CommandOptions {
     name: string;
     description?: string;
     execute(message: Message, args?: string[]): Promise<Message>;
 }
 
-export class CommandNew {
+export class Command {
     public name: string;
     public description: string;
     public execute: (message: Message, args?: string[]) => Promise<Message>;

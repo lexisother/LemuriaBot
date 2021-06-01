@@ -1,10 +1,9 @@
-import {Command, Event} from "./definitions";
+import {Command} from "./definitions";
 import {Collection} from "discord.js";
 import {promises as ffs} from "fs";
 
 // Taken from: https://github.com/keanuplayz/TravBot-v3/blob/5165c5ec4bd564d2415b11218671b164489058b6/src/core/command.ts
 export let commands: Collection<string, Command> | null = null;
-export const events: Event[] = [];
 
 async function loadCommands(): Promise<Collection<string, Command>> {
     if (commands) return commands;

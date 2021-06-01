@@ -2,7 +2,7 @@ import {commands} from "../core/lib";
 import {Command} from "../core/definitions";
 import {Message} from "discord.js";
 
-const command: Command = {
+export default new Command({
     name: "help",
     description: "Help command",
     async execute(message: Message, args: string[]): Promise<Message> {
@@ -23,6 +23,4 @@ const command: Command = {
         });
         return message.channel.send(helpMessage);
     }
-};
-
-export = command;
+});
