@@ -7,7 +7,7 @@ export default new Command({
     description: "Help command",
     async execute(message: Message, args: string[]): Promise<Message> {
         if (args.length == 1) {
-            const cmd = commands!.find((c) => c.name === args[0]);
+            const cmd = commands!.find((_k, v) => v === args[0]);
             if (cmd) return message.channel.send(`**${cmd.name}:** ${cmd.description}`);
             else return message.channel.send("Command not found!");
         }

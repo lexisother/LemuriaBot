@@ -31,10 +31,16 @@ async function loadCommand(filename: string, list: string[]) {
 
     if (!command) return console.log(`Command "${header}" has no default export which is a Command instance!`);
 
+    command.originalCommandName = header;
     list.push(header);
 
     if (commands.has(header)) console.log(`Command "${header}" already exists!`);
     else commands.set(header, command);
+
+    for (const alias of command.aliases) {
+        if (commands.has(alias)) console.log(`Top-level alias "${alias}" from command "${header}" already exists!`);
+        else commands.set(alias, command);
+    }
 
     console.log(`Loading command: ${header}`);
 }
