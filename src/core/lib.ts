@@ -15,6 +15,7 @@ async function loadCommands(): Promise<Collection<string, Command>> {
 
     // eslint-disable-next-line no-cond-assign
     while ((selected = await dir.read())) {
+        if (selected.name.endsWith(".map")) continue;
         loadCommand(selected.name, listMisc);
     }
 
