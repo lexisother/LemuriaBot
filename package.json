@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/lexisother/LemuriaBot#readme",
   "dependencies": {
-    "discord.js": "^12.5.3",
+    "discord.js": "^13.0.1",
     "glob": "^7.1.6"
   },
   "devDependencies": {

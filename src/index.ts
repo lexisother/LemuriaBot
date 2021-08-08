@@ -3,7 +3,9 @@ import config from "./config";
 import {init} from "./core/lib";
 
 export const main = __dirname;
-export const client = new discord.Client();
+export const client = new discord.Client({
+    intents: [discord.Intents.FLAGS.GUILDS, discord.Intents.FLAGS.GUILD_MESSAGES]
+});
 export const {prefix} = config;
 
 init();
